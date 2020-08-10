@@ -10,7 +10,7 @@ public class AbstractDrawing {
     }
 
     AbstractDrawing() {
-        
+
         GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 
         //south panel
@@ -28,35 +28,22 @@ public class AbstractDrawing {
         //end south panel
 
         //west panel
-        JLabel lShapes = new JLabel("Shapes", JLabel.CENTER);
-        JButton bSquare = new JButton("Square");
-        JButton bRectangle = new JButton("Rectangel");
-        JButton bCircle = new JButton("Circle");
-        JButton bOval = new JButton("Oval");
-        JLabel lColors = new JLabel("Colors", JLabel.CENTER);
-        JButton bBlues = new JButton("Blues");
-        JButton bGreens = new JButton("Greens");
-        JButton bYellows = new JButton("Yellows");
-        JButton bReds = new JButton("Reds");
-        JButton bMagentas = new JButton("Magentas");
+        JButton bBlues = new CoolButton("blue");
+        JButton bGreens = new CoolButton("green");
+        JButton bYellows = new CoolButton("yellow");
+        JButton bReds = new CoolButton("red");
+        JButton bMagentas = new CoolButton("magenta");
 
-        JPanel wPanel = new JPanel();
+        JPanel wPanel = new BPanel("/img/wPanelBg.png");
         wPanel.setLayout(new GridLayout(0, 1));
         ((GridLayout) wPanel.getLayout()).setVgap(5);
-        wPanel.setOpaque(false);
-        wPanel.add(lShapes);
-        wPanel.add(bSquare);
-        wPanel.add(bRectangle);
-        wPanel.add(bCircle);
-        wPanel.add(bOval);
-        wPanel.add(lColors);
         wPanel.add(bBlues);
         wPanel.add(bGreens);
         wPanel.add(bYellows);
         wPanel.add(bReds);
         wPanel.add(bMagentas);
         //end west panel
-        
+
         //drawing panel
         DrawingPanel dPanel = new DrawingPanel();
         ((FlowLayout) dPanel.getLayout()).setAlignment(FlowLayout.LEFT);
@@ -70,13 +57,14 @@ public class AbstractDrawing {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(BorderLayout.SOUTH, sPanel);
         frame.getContentPane().add(BorderLayout.CENTER, dPanel);
-                
+
         //action listeners
         bBlues.addActionListener(new ShadesListener(dPanel, "blues"));
         bGreens.addActionListener(new ShadesListener(dPanel, "greens"));
         bYellows.addActionListener(new ShadesListener(dPanel, "yellows"));
         bReds.addActionListener(new ShadesListener(dPanel, "reds"));
         bMagentas.addActionListener(new ShadesListener(dPanel, "magentas"));
+
         bWindow.addActionListener(new WindowListener(device, frame, bWindow));
         bExit.addActionListener(new ExitListener());
         bReset.addActionListener(new ResetListener(frame));
@@ -86,5 +74,4 @@ public class AbstractDrawing {
 
 /*TO DO
 - find a way to keep the drawing when RESIZING the window and when swithching between WINDOWED mode and FULLSCCREEN mode
-- implement the shapes / remove shapes buttons
 */
